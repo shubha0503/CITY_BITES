@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  RESTAURANT_OWNER
+  DELIVERY_PARTNER
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  ACCEPTED
+  PREPARING
+  READY
+  ASSIGNED
+  PICKED_UP
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+model User {
+  id           String      @id @default(cuid())
+  email        String      @unique
+  passwordHash String
+  role         Role        @default(CUSTOMER)
+  createdAt    DateTime    @default(now())
+  orders       Order[]     @relation("CustomerOrders")
+  riderOrders  Order[]     @relation("RiderOrders")
+}
+
+model Restaurant {
+  id        String     @id @default(cuid())
+  name      String
+  slug      String     @unique
+  city      String
+  isOpen    Boolean    @default(true)
+  menuItems MenuItem[]
+  orders    Order[]
+  createdAt DateTime   @default(now())
+}
+
+model MenuItem {
+  id           String     @id @default(cuid())
+  restaurantId String
+  name         String
+  price        Int
+  isAvailable  Boolean    @default(true)
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+}
+
+model Order {
+  id           String      @id @default(cuid())
+  userId       String
+  restaurantId String?
+  riderId      String?
+  status       OrderStatus @default(PENDING)
+  total        Int
+  items        Json?       // Stores list of items (id, name, price, quantity, customizations)
+  createdAt    DateTime    @default(now())
+  
+  user         User        @relation("CustomerOrders", fields: [userId], references: [id])
+  restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+  rider        User?       @relation("RiderOrders", fields: [riderId], references: [id])
+}

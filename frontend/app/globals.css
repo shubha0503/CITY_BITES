@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1b3027;
+  --color-cream: #fbf9f4;
+  --color-coral: #e6522c;
+  --color-gold: #f0bd5a;
+  --color-line: #e6dfd5;
+  --color-moss: #3a5749;
+  
+  --font-serif: var(--font-serif), Georgia, serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+
+  --animate-marquee: marquee 35s linear infinite;
+  --animate-spin-slow: spin 25s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(-5deg); }
+    50% { transform: translateY(-15px) rotate(-3deg); }
+  }
+}
+
+:root {
+  --ink: #1b3027;
+  --cream: #fbf9f4;
+  --coral: #e6522c;
+  --gold: #f0bd5a;
+  --line: #e6dfd5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Custom Premium Utilities */
+.glass {
+  background: rgba(253, 251, 247, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(230, 223, 213, 0.4);
+}
+
+.dark-glass {
+  background: rgba(27, 48, 39, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(240, 189, 90, 0.15);
+}
+
+.editorial-shadow {
+  box-shadow: 0 20px 40px -15px rgba(27, 48, 39, 0.1);
+}
+
+.premium-card-shadow {
+  box-shadow: 0 10px 30px -10px rgba(27, 48, 39, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d8cfc3;
+}
+
+/* Custom animations and styling for layout */
+.nav-link-hover {
+  position: relative;
+}
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1.5px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--coral);
+  transform-origin: bottom right;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link-hover:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Magnetic button layout */
+.btn-magnetic {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-magnetic:active {
+  transform: scale(0.96);
+}
+
+/* Overlapping typography */
+.huge-text {
+  font-size: clamp(52px, 8.5vw, 110px);
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+}
+
+/* Premium radial indicator */
+.radar-grid {
+  background-image: radial-gradient(rgba(240, 189, 90, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Input elements styling */
+input, select, textarea {
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--ink);
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(230, 82, 44, 0.1);
+}

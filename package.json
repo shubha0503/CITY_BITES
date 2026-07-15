@@ -2,6 +2,11 @@
   "name": "citybites",
   "version": "1.0.0",
   "private": true,
-  "scripts": { "dev": "vite", "build": "vite", "preview": "vite preview" },
-  "devDependencies": { "vite": "^6.1.0" }
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "dev": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspace=frontend",
+    "test": "npm run test --workspace=backend",
+    "dev:api": "npm run dev --workspace=backend"
+  }
 }
