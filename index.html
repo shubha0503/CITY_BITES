@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ef5a35" />
+    <title>CityBites — Local food, delivered</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="#" class="brand"><span>✦</span> citybites</a>
+      <nav><button class="nav-link active" data-page="home">Discover</button><button class="nav-link" data-page="orders">My orders</button><button class="nav-link" data-page="dashboard">Partner portal</button></nav>
+      <div class="head-actions"><button class="location">⌖  Civil Lines, Raipur</button><button class="avatar">SK</button></div>
+    </header>
+    <main id="app"></main>
+    <aside id="cart" class="cart-panel"><div class="cart-head"><h2>Your basket</h2><button class="close-cart">×</button></div><div id="cart-items"></div><div id="cart-footer"></div></aside>
+    <div id="toast"></div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
